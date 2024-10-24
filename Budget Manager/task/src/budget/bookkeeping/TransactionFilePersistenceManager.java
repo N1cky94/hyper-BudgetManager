@@ -1,6 +1,7 @@
 package budget.bookkeeping;
 
-public class TransactionFilePersistanceManager implements TransactionPersistanceManager {
+public class TransactionFilePersistenceManager implements TransactionPersistenceManager {
+
     @Override
     public void save(TransactionManager manager) {
 

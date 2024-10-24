@@ -82,4 +82,15 @@ public class InMemoryTransactionManager implements TransactionManager {
                 .mapToDouble(Transaction::amount)
                 .sum();
     }
+
+    @Override
+    public void deleteAllTransactions() {
+        transactions.removeAll(transactions);
+    }
+
+    @Override
+    public void reloadTransactionsFrom(List<Transaction> transactions) {
+        deleteAllTransactions();
+        this.transactions.addAll(transactions);
+    }
 }

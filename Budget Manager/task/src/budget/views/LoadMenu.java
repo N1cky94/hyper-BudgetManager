@@ -1,16 +1,16 @@
 package budget.views;
 
-import budget.bookkeeping.TransactionFilePersistenceManager;
-import budget.bookkeeping.TransactionManager;
-import budget.bookkeeping.TransactionPersistenceManager;
+import budget.bookkeeping.FinancialFilePersistenceService;
+import budget.bookkeeping.FinancialManager;
+import budget.bookkeeping.FinancialPersistenceService;
 
 public class LoadMenu {
-    private final TransactionManager manager;
-    private final TransactionPersistenceManager persistence;
+    private final FinancialManager manager;
+    private final FinancialPersistenceService persistence;
 
-    LoadMenu(TransactionManager manager) {
+    LoadMenu(FinancialManager manager) {
         this.manager = manager;
-        this.persistence = new TransactionFilePersistenceManager();
+        this.persistence = new FinancialFilePersistenceService();
     }
 
     public void show() {

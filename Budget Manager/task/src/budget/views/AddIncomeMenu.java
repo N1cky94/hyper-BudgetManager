@@ -1,11 +1,11 @@
 package budget.views;
 
-import budget.bookkeeping.TransactionManager;
+import budget.bookkeeping.FinancialManager;
 import budget.util.Keyboard;
 
 public final class AddIncomeMenu {
-    private final TransactionManager manager;
-    AddIncomeMenu(TransactionManager manager) {
+    private final FinancialManager manager;
+    AddIncomeMenu(FinancialManager manager) {
         this.manager = manager;
     }
 

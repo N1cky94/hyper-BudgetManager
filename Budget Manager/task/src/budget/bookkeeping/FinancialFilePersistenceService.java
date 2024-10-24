@@ -3,10 +3,10 @@ package budget.bookkeeping;
 import java.io.*;
 import java.util.List;
 
-public class TransactionFilePersistenceManager implements TransactionPersistenceManager {
+public class FinancialFilePersistenceService implements FinancialPersistenceService {
 
     @Override
-    public void save(TransactionManager manager) {
+    public void save(FinancialManager manager) {
         try (
                 FileWriter file = new FileWriter("purchases.txt");
                 BufferedWriter writer = new BufferedWriter(file)
@@ -30,7 +30,7 @@ public class TransactionFilePersistenceManager implements TransactionPersistence
     }
 
     @Override
-    public void load(TransactionManager manager) {
+    public void load(FinancialManager manager) {
         try (
                 FileReader file = new FileReader("purchases.txt");
                 BufferedReader reader = new BufferedReader(file)

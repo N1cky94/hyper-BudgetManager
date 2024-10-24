@@ -1,10 +1,10 @@
 package budget.views;
 
-import budget.bookkeeping.TransactionManager;
+import budget.bookkeeping.FinancialManager;
 
 public final class BalanceMenu {
-    private final TransactionManager manager;
-    BalanceMenu(TransactionManager manager) {
+    private final FinancialManager manager;
+    BalanceMenu(FinancialManager manager) {
         this.manager = manager;
     }
 

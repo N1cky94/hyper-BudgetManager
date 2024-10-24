@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class InMemoryTransactionManager implements TransactionManager {
-    private static final InMemoryTransactionManager MANAGER = new InMemoryTransactionManager(new ArrayList<>());
+public class InMemoryFinancialManager implements FinancialManager {
+    private static final InMemoryFinancialManager MANAGER = new InMemoryFinancialManager(new ArrayList<>());
     private final List<Transaction> transactions;
 
-    private InMemoryTransactionManager(List<Transaction> transactions) {
+    private InMemoryFinancialManager(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 
-    public static InMemoryTransactionManager getInstance() {
+    public static InMemoryFinancialManager getInstance() {
         return MANAGER;
     }
 

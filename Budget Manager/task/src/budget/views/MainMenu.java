@@ -1,13 +1,13 @@
 package budget.views;
 
-import budget.bookkeeping.InMemoryTransactionManager;
-import budget.bookkeeping.TransactionManager;
+import budget.bookkeeping.InMemoryFinancialManager;
+import budget.bookkeeping.FinancialManager;
 import budget.util.Keyboard;
 
 import static java.lang.System.exit;
 
 public final class MainMenu {
-    private final TransactionManager manager;
+    private final FinancialManager manager;
     private final AddIncomeMenu addIncomeMenu;
     private final BalanceMenu balanceMenu;
     private final AddPurchaseMenu addPurchaseMenu;
@@ -16,7 +16,7 @@ public final class MainMenu {
     private final LoadMenu loadMenu;
 
     public MainMenu() {
-        manager = InMemoryTransactionManager.getInstance();
+        manager = InMemoryFinancialManager.getInstance();
         addIncomeMenu = new AddIncomeMenu(manager);
         addPurchaseMenu = new AddPurchaseMenu(manager);
         balanceMenu = new BalanceMenu(manager);

@@ -2,14 +2,14 @@ package budget.views;
 
 import budget.bookkeeping.Transaction;
 import budget.bookkeeping.TransactionCategory;
-import budget.bookkeeping.TransactionManager;
+import budget.bookkeeping.FinancialManager;
 import budget.util.Keyboard;
 
 import java.util.List;
 
 public final class ListOfPurchasesMenu {
-    private final TransactionManager manager;
-    ListOfPurchasesMenu(TransactionManager manager) {
+    private final FinancialManager manager;
+    ListOfPurchasesMenu(FinancialManager manager) {
         this.manager = manager;
     }
 

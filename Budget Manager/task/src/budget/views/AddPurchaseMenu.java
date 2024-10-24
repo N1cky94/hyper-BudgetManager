@@ -1,12 +1,12 @@
 package budget.views;
 
 import budget.bookkeeping.TransactionCategory;
-import budget.bookkeeping.TransactionManager;
+import budget.bookkeeping.FinancialManager;
 import budget.util.Keyboard;
 
 public final class AddPurchaseMenu {
-    private final TransactionManager manager;
-    AddPurchaseMenu(TransactionManager manager) {
+    private final FinancialManager manager;
+    AddPurchaseMenu(FinancialManager manager) {
         this.manager = manager;
     }
 

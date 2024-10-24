@@ -1,5 +1,9 @@
 package budget.bookkeeping;
 
+import budget.bookkeeping.transaction.Transaction;
+import budget.bookkeeping.transaction.TransactionCategory;
+import budget.bookkeeping.transaction.TransactionType;
+
 import java.io.*;
 import java.util.List;
 

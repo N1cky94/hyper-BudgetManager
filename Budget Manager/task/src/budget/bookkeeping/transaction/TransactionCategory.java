@@ -1,4 +1,4 @@
-package budget.bookkeeping;
+package budget.bookkeeping.transaction;
 
 public enum TransactionCategory {
     FOOD("Food"),

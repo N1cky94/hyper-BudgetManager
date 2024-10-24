@@ -1,7 +1,7 @@
 package budget.views.sub;
 
-import budget.bookkeeping.Transaction;
-import budget.bookkeeping.TransactionCategory;
+import budget.bookkeeping.transaction.Transaction;
+import budget.bookkeeping.transaction.TransactionCategory;
 import budget.bookkeeping.FinancialManager;
 import budget.util.Keyboard;
 

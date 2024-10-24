@@ -17,6 +17,11 @@ public class InMemoryTransactionManager implements TransactionManager {
     }
 
     @Override
+    public List<Transaction> allTransactions() {
+        return new ArrayList<>(transactions);
+    }
+
+    @Override
     public void addIncome(double amount) {
         Transaction income = new Transaction(
                 amount,

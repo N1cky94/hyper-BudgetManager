@@ -3,6 +3,7 @@ package budget.bookkeeping;
 import java.util.List;
 
 public interface TransactionManager {
+    List<Transaction> allTransactions();
     void addIncome(double amount);
     double getBalance();
     List<Transaction> getPurchases();

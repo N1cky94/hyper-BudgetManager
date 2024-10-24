@@ -64,7 +64,8 @@ public final class ListOfPurchasesMenu {
             showNoPurchases();
         } else {
             purchases.forEach(System.out::println);
-            System.out.println("Total sum: $" + manager.getCost());
+            double total = purchases.stream().mapToDouble(Transaction::amount).sum();
+            System.out.println("Total sum: $" + total);
         }
     }
 }

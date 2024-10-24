@@ -9,7 +9,7 @@ import java.util.List;
 
 public final class ListOfPurchasesMenu {
     private final FinancialManager manager;
-    ListOfPurchasesMenu(FinancialManager manager) {
+    public ListOfPurchasesMenu(FinancialManager manager) {
         this.manager = manager;
     }
 

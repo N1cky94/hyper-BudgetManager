@@ -8,7 +8,7 @@ public class SaveMenu {
     private final FinancialManager manager;
     private final FinancialPersistenceService persistence;
 
-    SaveMenu(FinancialManager manager) {
+    public SaveMenu(FinancialManager manager) {
         this.manager = manager;
         this.persistence = new FinancialFilePersistenceService();
     }

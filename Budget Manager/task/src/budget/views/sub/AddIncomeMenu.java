@@ -5,7 +5,7 @@ import budget.util.Keyboard;
 
 public final class AddIncomeMenu {
     private final FinancialManager manager;
-    AddIncomeMenu(FinancialManager manager) {
+    public AddIncomeMenu(FinancialManager manager) {
         this.manager = manager;
     }
 

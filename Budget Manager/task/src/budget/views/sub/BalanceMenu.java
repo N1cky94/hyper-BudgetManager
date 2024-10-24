@@ -4,7 +4,7 @@ import budget.bookkeeping.FinancialManager;
 
 public final class BalanceMenu {
     private final FinancialManager manager;
-    BalanceMenu(FinancialManager manager) {
+    public BalanceMenu(FinancialManager manager) {
         this.manager = manager;
     }
 

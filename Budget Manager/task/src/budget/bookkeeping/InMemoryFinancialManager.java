@@ -10,10 +10,13 @@ import java.util.stream.Stream;
 
 public class InMemoryFinancialManager implements FinancialManager {
     private static final InMemoryFinancialManager MANAGER = new InMemoryFinancialManager(new ArrayList<>());
+    private final FinancialPersistenceService persistence;
     private final List<Transaction> transactions;
 
     private InMemoryFinancialManager(List<Transaction> transactions) {
         this.transactions = transactions;
+        // todo: Give this object to it for easier saving
+        this.persistence = new FinancialFilePersistenceService();
     }
 
     public static InMemoryFinancialManager getInstance() {
@@ -23,6 +26,16 @@ public class InMemoryFinancialManager implements FinancialManager {
     @Override
     public List<Transaction> allTransactions() {
         return new ArrayList<>(transactions);
+    }
+
+    @Override
+    public void save() {
+        persistence.save(this);
+    }
+
+    @Override
+    public void load() {
+        persistence.load(this);
     }
 
     @Override

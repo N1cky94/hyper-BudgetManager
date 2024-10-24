@@ -17,5 +17,7 @@ public interface FinancialManager {
     double getIncome();
     void deleteAllTransactions();
     void reloadTransactionsFrom(List<Transaction> transactions);
+    void save();
+    void load();
 
 }

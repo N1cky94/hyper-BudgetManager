@@ -37,8 +37,20 @@ public class InMemoryTransactionManager implements TransactionManager {
     }
 
     @Override
+    public boolean hasPurchases() {
+        return !getPurchases().isEmpty();
+    }
+
+    @Override
     public List<Transaction> getPurchases() {
         return getTransactions(TransactionType.OUTGOING).toList();
+    }
+
+    @Override
+    public List<Transaction> getPurchasesBy(TransactionCategory category) {
+        return getTransactions(TransactionType.OUTGOING)
+                .filter(t -> t.category().equals(category))
+                .toList();
     }
 
     private Stream<Transaction> getTransactions(TransactionType type) {

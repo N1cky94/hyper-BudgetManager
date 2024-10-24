@@ -1,25 +1,13 @@
 package budget;
 
-import budget.bookkeeping.Purchase;
-import budget.util.Keyboard;
-
-import java.util.ArrayList;
-import java.util.List;
+import budget.views.MainMenu;
 
 public class BookyApp {
     public static void main(String[] args) {
-        List<Purchase> list = new ArrayList<>();
+        MainMenu menu = new MainMenu();
 
-        while(Keyboard.hasNextLine()) {
-            String unparsedArticle = Keyboard.requestNextProvidedLine();
-            list.add(Purchase.of(unparsedArticle));
+        while(true) {
+            menu.show();
         }
-
-        list.forEach(System.out::println);
-
-        double sum = list.stream()
-                .mapToDouble(Purchase::price)
-                .sum();
-        System.out.printf("%nTotal: $%.2f%n", sum);
     }
 }

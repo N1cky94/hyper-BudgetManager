@@ -24,7 +24,7 @@ public final class ListOfPurchasesMenu {
 
         while(keepGoing) {
 
-            System.out.println("Choose the type of purchase");
+            System.out.println("\nChoose the type of purchase");
 
             System.out.println("1) Food");
             System.out.println("2) Clothes");
@@ -40,10 +40,11 @@ public final class ListOfPurchasesMenu {
                 case 6 -> keepGoing = false;
             }
         }
+        System.out.println();
     }
 
     private void showNoPurchases() {
-        System.out.println("The purchase list is empty\n");
+        System.out.println("\nThe purchase list is empty\n");
     }
 
     private void getAll() {
@@ -64,7 +65,6 @@ public final class ListOfPurchasesMenu {
         } else {
             purchases.forEach(System.out::println);
             System.out.println("Total sum: $" + manager.getCost());
-            System.out.println();
         }
     }
 }

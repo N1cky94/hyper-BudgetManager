@@ -13,6 +13,8 @@ public class InMemoryFinancialManager implements FinancialManager {
     private final FinancialPersistenceService persistence;
     private final List<Transaction> transactions;
 
+    // todo: Remove methods that can be abused.
+
     private InMemoryFinancialManager(List<Transaction> transactions) {
         this.transactions = transactions;
         // todo: Give this object to it for easier saving
@@ -24,6 +26,7 @@ public class InMemoryFinancialManager implements FinancialManager {
     }
 
     @Override
+    @Deprecated
     public List<Transaction> allTransactions() {
         return new ArrayList<>(transactions);
     }
@@ -105,11 +108,13 @@ public class InMemoryFinancialManager implements FinancialManager {
                 .sum();
     }
 
+    @Deprecated
     @Override
     public void deleteAllTransactions() {
         transactions.removeAll(transactions);
     }
 
+    @Deprecated
     @Override
     public void reloadTransactionsFrom(List<Transaction> transactions) {
         deleteAllTransactions();

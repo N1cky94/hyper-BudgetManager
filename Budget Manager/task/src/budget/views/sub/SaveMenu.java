@@ -1,21 +1,21 @@
-package budget.views;
+package budget.views.sub;
 
 import budget.bookkeeping.FinancialFilePersistenceService;
 import budget.bookkeeping.FinancialManager;
 import budget.bookkeeping.FinancialPersistenceService;
 
-public class LoadMenu {
+public class SaveMenu {
     private final FinancialManager manager;
     private final FinancialPersistenceService persistence;
 
-    LoadMenu(FinancialManager manager) {
+    SaveMenu(FinancialManager manager) {
         this.manager = manager;
         this.persistence = new FinancialFilePersistenceService();
     }
 
     public void show() {
-        persistence.load(manager);
+        persistence.save(manager);
 
-        System.out.println("\nPurchases were loaded!\n");
+        System.out.println("\nPurchases were saved!\n");
     }
 }

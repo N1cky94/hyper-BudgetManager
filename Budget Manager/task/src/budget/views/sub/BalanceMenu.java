@@ -1,4 +1,4 @@
-package budget.views;
+package budget.views.sub;
 
 import budget.bookkeeping.FinancialManager;
 

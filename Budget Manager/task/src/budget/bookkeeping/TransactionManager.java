@@ -6,7 +6,10 @@ public interface TransactionManager {
     void addIncome(double amount);
     double getBalance();
     List<Transaction> getPurchases();
+    List<Transaction> getPurchasesBy(TransactionCategory category);
+    boolean hasPurchases();
     void registerPurchase(String name, double price, TransactionCategory category);
     double getCost();
     double getIncome();
+
 }

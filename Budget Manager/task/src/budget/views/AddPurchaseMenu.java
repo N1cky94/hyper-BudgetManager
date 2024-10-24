@@ -11,17 +11,21 @@ public final class AddPurchaseMenu {
     }
 
     public void show() {
-        int categoryChoice = Keyboard.requestNextInt(showCategoryMenu());
-        String purchaseName = Keyboard.requestInput("\nEnter purchase name:");
-        double purchasePrice = Keyboard.requestNextDouble("Enter its price:");
+        while (true) {
+            int categoryChoice = Keyboard.requestNextInt(showCategoryMenu());
 
-        if (categoryChoice >= TransactionCategory.values().length + 1) {
-            return;
+            if (categoryChoice >= TransactionCategory.values().length + 1) {
+                System.out.println();
+                return;
+            }
+
+            String purchaseName = Keyboard.requestInput("\nEnter purchase name:");
+            double purchasePrice = Keyboard.requestNextDouble("Enter its price:");
+
+            manager.registerPurchase(purchaseName, purchasePrice, TransactionCategory.values()[categoryChoice - 1]);
+
+            System.out.println("Purchase was added!\n");
         }
-
-        manager.registerPurchase(purchaseName, purchasePrice, TransactionCategory.values()[categoryChoice - 1]);
-
-        System.out.println("Purchase was added!\n");
     }
 
     private String showCategoryMenu() {

@@ -24,7 +24,7 @@ public final class AddPurchaseMenu {
 
             manager.registerPurchase(purchaseName, purchasePrice, TransactionCategory.values()[categoryChoice - 1]);
 
-            System.out.println("Purchase was added!\n");
+            System.out.println("Purchase was added!");
         }
     }
 

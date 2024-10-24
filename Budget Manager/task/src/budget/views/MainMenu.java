@@ -12,6 +12,8 @@ public final class MainMenu {
     private final BalanceMenu balanceMenu;
     private final AddPurchaseMenu addPurchaseMenu;
     private final ListOfPurchasesMenu purchasesMenu;
+    private final SaveMenu saveMenu;
+    private final LoadMenu loadMenu;
 
     public MainMenu() {
         manager = InMemoryTransactionManager.getInstance();
@@ -19,6 +21,8 @@ public final class MainMenu {
         addPurchaseMenu = new AddPurchaseMenu(manager);
         balanceMenu = new BalanceMenu(manager);
         purchasesMenu = new ListOfPurchasesMenu(manager);
+        saveMenu = new SaveMenu(manager);
+        loadMenu = new LoadMenu(manager);
     }
 
     public void show() {
@@ -27,6 +31,8 @@ public final class MainMenu {
         System.out.println("2) Add purchase");
         System.out.println("3) Show list of purchases");
         System.out.println("4) Balance");
+        System.out.println("5) Save");
+        System.out.println("6) Load");
         System.out.println("0) Exit");
 
         handleUserInput();
@@ -41,6 +47,8 @@ public final class MainMenu {
             case 2 -> addPurchaseMenu.show();
             case 3 -> purchasesMenu.show();
             case 4 -> balanceMenu.show();
+            case 5 -> saveMenu.show();
+            case 6 -> loadMenu.show();
             default -> throw new IllegalArgumentException("Chosen choice has no connected function");
         }
     }

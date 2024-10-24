@@ -1,0 +1,27 @@
+### Project Specific ###
+
+
+### Lab specific ###
+Budget Manager/Analyzer
+Budget Manager/Count my money
+Budget Manager/Make a menu
+Budget Manager/Memorable purchases
+Budget Manager/Oh the things you can buy
+Budget Manager/lesson-info.yaml
+/Topics
+course-info.yaml
+course-remote-info.yaml
+
+
+### IDEA ###
+.idea/
+*.iml
+
+
+### Gradle ###
+.gradle/
+*build
+*out
+
+### Maven ###
+*target

@@ -18,6 +18,24 @@ public class Keyboard {
         return requestNextProvidedLine();
     }
 
+    public static int requestNextInt() {
+        return Integer.parseInt(KEYBOARD.nextLine());
+    }
+
+    public static int requestNextInt(String message) {
+        System.out.println(message);
+        return requestNextInt();
+    }
+
+    public static double requestNextDouble() {
+        return Double.parseDouble(KEYBOARD.nextLine());
+    }
+
+    public static double requestNextDouble(String message) {
+        System.out.println(message);
+        return requestNextDouble();
+    }
+
     public static boolean hasNextLine() {
         return KEYBOARD.hasNextLine();
     }

@@ -1,6 +1,5 @@
 package budget.views;
 
-import budget.bookkeeping.Transaction;
 import budget.bookkeeping.TransactionManager;
 import budget.util.Keyboard;
 

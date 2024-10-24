@@ -3,7 +3,8 @@ package budget.bookkeeping;
 public record Transaction(
         double amount,
         String name,
-        TransactionType type
+        TransactionType type,
+        TransactionCategory category
 ) {
     @Override
     public String toString() {

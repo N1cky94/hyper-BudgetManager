@@ -21,7 +21,8 @@ public class InMemoryTransactionManager implements TransactionManager {
         Transaction income = new Transaction(
                 amount,
                 "income",
-                TransactionType.INCOMING
+                TransactionType.INCOMING,
+                null
         );
 
         transactions.add(income);
@@ -45,8 +46,8 @@ public class InMemoryTransactionManager implements TransactionManager {
     }
 
     @Override
-    public void registerPurchase(String name, double price) {
-        Transaction purchase = new Transaction(price, name, TransactionType.OUTGOING);
+    public void registerPurchase(String name, double price, TransactionCategory category) {
+        Transaction purchase = new Transaction(price, name, TransactionType.OUTGOING, category);
         registerTransaction(purchase);
     }
 

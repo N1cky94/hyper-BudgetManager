@@ -2,6 +2,7 @@ package budget.bookkeeping;
 
 import budget.bookkeeping.transaction.Transaction;
 import budget.bookkeeping.transaction.TransactionCategory;
+import budget.bookkeeping.transaction.TransactionList;
 import budget.bookkeeping.transaction.TransactionType;
 
 import java.util.ArrayList;
@@ -9,13 +10,13 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class InMemoryFinancialManager implements FinancialManager {
-    private static final InMemoryFinancialManager MANAGER = new InMemoryFinancialManager(new ArrayList<>());
+    private static final InMemoryFinancialManager MANAGER = new InMemoryFinancialManager(new TransactionList());
     private final FinancialPersistenceService persistence;
-    private final List<Transaction> transactions;
+    private final TransactionList transactions;
 
     // todo: Remove methods that can be abused.
 
-    private InMemoryFinancialManager(List<Transaction> transactions) {
+    private InMemoryFinancialManager(TransactionList transactions) {
         this.transactions = transactions;
         // todo: Give this object to it for easier saving
         this.persistence = new FinancialFilePersistenceService();
@@ -28,7 +29,7 @@ public class InMemoryFinancialManager implements FinancialManager {
     @Override
     @Deprecated
     public List<Transaction> allTransactions() {
-        return new ArrayList<>(transactions);
+        return transactions.fetchAllTransactions();
     }
 
     @Override
@@ -50,15 +51,12 @@ public class InMemoryFinancialManager implements FinancialManager {
                 null
         );
 
-        transactions.add(income);
+        transactions.registerTransaction(income);
     }
 
     @Override
     public double getBalance() {
-        double in = getIncome();
-        double out = getCost();
-
-        return in - out;
+        return transactions.calculateBalance();
     }
 
     @Override
@@ -68,44 +66,28 @@ public class InMemoryFinancialManager implements FinancialManager {
 
     @Override
     public List<Transaction> getPurchases() {
-        return getTransactions(TransactionType.OUTGOING).toList();
+        return transactions.fetchTransactionByType(TransactionType.OUTGOING);
     }
 
     @Override
     public List<Transaction> getPurchasesBy(TransactionCategory category) {
-        return getTransactions(TransactionType.OUTGOING)
-                .filter(t -> t.category().equals(category))
-                .toList();
-    }
-
-    private Stream<Transaction> getTransactions(TransactionType type) {
-        return transactions.stream().filter(t -> t.type().equals(type));
+        return transactions.fetchTransactionByCategory(category);
     }
 
     @Override
     public void registerPurchase(String name, double price, TransactionCategory category) {
         Transaction purchase = new Transaction(price, name, TransactionType.OUTGOING, category);
-        registerTransaction(purchase);
-    }
-
-    private void registerTransaction(Transaction transaction) {
-        transactions.add(transaction);
+        transactions.registerTransaction(purchase);
     }
 
     @Override
     public double getCost() {
-        return getAmountBy(TransactionType.OUTGOING);
+        return transactions.calculateByType(TransactionType.OUTGOING);
     }
 
     @Override
     public double getIncome() {
-        return getAmountBy(TransactionType.INCOMING);
-    }
-
-    public double getAmountBy(TransactionType type) {
-        return getTransactions(type)
-                .mapToDouble(Transaction::amount)
-                .sum();
+        return transactions.calculateByType(TransactionType.INCOMING);
     }
 
     @Deprecated

@@ -24,12 +24,6 @@ public class InMemoryFinancialManager implements FinancialManager {
     }
 
     @Override
-    @Deprecated
-    public List<Transaction> allTransactions() {
-        return transactions.fetchAllTransactions();
-    }
-
-    @Override
     public void save() {
         transactions.persist();
     }
@@ -75,17 +69,5 @@ public class InMemoryFinancialManager implements FinancialManager {
     public void registerPurchase(String name, double price, TransactionCategory category) {
         Transaction purchase = new Transaction(price, name, TransactionType.OUTGOING, category);
         transactions.registerTransaction(purchase);
-    }
-
-    @Override
-    @Deprecated
-    public double getCost() {
-        return transactions.calculateByType(TransactionType.OUTGOING);
-    }
-
-    @Override
-    @Deprecated
-    public double getIncome() {
-        return transactions.calculateByType(TransactionType.INCOMING);
     }
 }

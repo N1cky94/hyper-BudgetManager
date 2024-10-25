@@ -5,9 +5,7 @@ import budget.bookkeeping.transaction.TransactionCategory;
 import budget.bookkeeping.transaction.TransactionList;
 import budget.bookkeeping.transaction.TransactionType;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class InMemoryFinancialManager implements FinancialManager {
     private static final InMemoryFinancialManager MANAGER = new InMemoryFinancialManager(new TransactionList());
@@ -61,13 +59,39 @@ public class InMemoryFinancialManager implements FinancialManager {
     }
 
     @Override
+    public List<Transaction> getPurchasesSorted() {
+        return transactions.fetchTransactionByType(TransactionType.OUTGOING)
+                .stream()
+                .sorted()
+                .toList();
+    }
+
+    @Override
     public List<Transaction> getPurchasesBy(TransactionCategory category) {
         return transactions.fetchTransactionByCategory(category);
+    }
+
+    @Override
+    public List<Transaction> getPurchasesBySorted(TransactionCategory category) {
+        return transactions.fetchTransactionByCategory(category)
+                .stream()
+                .sorted()
+                .toList();
     }
 
     @Override
     public void registerPurchase(String name, double price, TransactionCategory category) {
         Transaction purchase = new Transaction(price, name, TransactionType.OUTGOING, category);
         transactions.registerTransaction(purchase);
+    }
+
+    @Override
+    public double calculateTotalBy(TransactionCategory category) {
+        return transactions.calculateByCategory(category);
+    }
+
+    @Override
+    public double calculateTotal() {
+        return transactions.calculateByType(TransactionType.OUTGOING);
     }
 }

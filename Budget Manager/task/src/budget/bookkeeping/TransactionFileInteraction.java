@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.List;
 
 public class TransactionFileInteraction {
-    private static final String FILE_NAME = "puchases.txt";
+    private static final String FILE_NAME = "purchases.txt";
     private final TransactionList list;
 
     public TransactionFileInteraction(TransactionList list) {

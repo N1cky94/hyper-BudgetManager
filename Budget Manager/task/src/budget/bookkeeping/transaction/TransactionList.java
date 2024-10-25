@@ -66,12 +66,4 @@ public class TransactionList {
     public void persist() {
         interact.save();
     }
-
-//    private Stream<Transaction> onTransaction() {
-//        return transactions.stream();
-//    }
-//
-//    private Stream<Transaction> performTypeFilter(TransactionType type) {
-//
-//    }
 }

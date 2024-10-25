@@ -11,15 +11,12 @@ import java.util.stream.Stream;
 
 public class InMemoryFinancialManager implements FinancialManager {
     private static final InMemoryFinancialManager MANAGER = new InMemoryFinancialManager(new TransactionList());
-    private final FinancialPersistenceService persistence;
     private final TransactionList transactions;
 
     // todo: Remove methods that can be abused.
 
     private InMemoryFinancialManager(TransactionList transactions) {
         this.transactions = transactions;
-        // todo: Give this object to it for easier saving
-        this.persistence = new FinancialFilePersistenceService();
     }
 
     public static InMemoryFinancialManager getInstance() {
@@ -34,12 +31,12 @@ public class InMemoryFinancialManager implements FinancialManager {
 
     @Override
     public void save() {
-        persistence.save(this);
+        transactions.persist();
     }
 
     @Override
     public void load() {
-        persistence.load(this);
+        transactions.load();
     }
 
     @Override
@@ -81,25 +78,14 @@ public class InMemoryFinancialManager implements FinancialManager {
     }
 
     @Override
+    @Deprecated
     public double getCost() {
         return transactions.calculateByType(TransactionType.OUTGOING);
     }
 
     @Override
+    @Deprecated
     public double getIncome() {
         return transactions.calculateByType(TransactionType.INCOMING);
-    }
-
-    @Deprecated
-    @Override
-    public void deleteAllTransactions() {
-        transactions.removeAll(transactions);
-    }
-
-    @Deprecated
-    @Override
-    public void reloadTransactionsFrom(List<Transaction> transactions) {
-        deleteAllTransactions();
-        this.transactions.addAll(transactions);
     }
 }

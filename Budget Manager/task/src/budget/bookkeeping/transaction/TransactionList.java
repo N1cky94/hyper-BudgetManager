@@ -1,25 +1,18 @@
 package budget.bookkeeping.transaction;
 
+import budget.bookkeeping.TransactionFileInteraction;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class TransactionList {
     private final List<Transaction> transactions;
+    private final TransactionFileInteraction interact;
 
     public TransactionList() {
         transactions = new ArrayList<>();
+        interact = new TransactionFileInteraction(this);
     }
-
-    /* todo
-        - [x] Add a transaction
-        - [x] fetch all
-        - [x] fetch by type
-        - [x] fetch by category
-        - [x] calculate total
-        - [x] calculate total by type
-        - [x] calculate total by Category
-     */
 
     public void registerTransaction(Transaction transaction) {
         transactions.add(transaction);
@@ -37,6 +30,7 @@ public class TransactionList {
 
     public List<Transaction> fetchTransactionByCategory(TransactionCategory category) {
         return transactions.stream()
+                .filter(transaction -> transaction.type().equals(TransactionType.OUTGOING))
                 .filter(transaction -> transaction.category().equals(category))
                 .toList();
     }
@@ -59,6 +53,18 @@ public class TransactionList {
         return fetchTransactionByCategory(category).stream()
                 .mapToDouble(Transaction::amount)
                 .sum();
+    }
+
+    private void upload(List<Transaction> newTransactions) {
+        transactions.addAll(newTransactions);
+    }
+
+    public void load() {
+        upload(interact.load());
+    }
+
+    public void persist() {
+        interact.save();
     }
 
 //    private Stream<Transaction> onTransaction() {

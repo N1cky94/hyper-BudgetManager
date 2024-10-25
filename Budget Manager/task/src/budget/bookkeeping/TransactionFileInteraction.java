@@ -2,23 +2,27 @@ package budget.bookkeeping;
 
 import budget.bookkeeping.transaction.Transaction;
 import budget.bookkeeping.transaction.TransactionCategory;
+import budget.bookkeeping.transaction.TransactionList;
 import budget.bookkeeping.transaction.TransactionType;
 
 import java.io.*;
 import java.util.List;
 
-public class FinancialFilePersistenceService implements FinancialPersistenceService {
+public class TransactionFileInteraction {
+    private static final String FILE_NAME = "puchases.txt";
+    private final TransactionList list;
 
-    @Override
-    public void save(FinancialManager manager) {
+    public TransactionFileInteraction(TransactionList list) {
+        this.list = list;
+    }
+
+    public void save() {
         try (
-                FileWriter file = new FileWriter("purchases.txt");
+                FileWriter file = new FileWriter(FILE_NAME);
                 BufferedWriter writer = new BufferedWriter(file)
         ) {
 
-            List<Transaction> transactions = manager.allTransactions();
-
-            transactions.stream()
+            list.fetchAllTransactions().stream()
                     .map(this::marshallTransaction)
                     .forEach(t -> {
                         try {
@@ -33,31 +37,29 @@ public class FinancialFilePersistenceService implements FinancialPersistenceServ
         }
     }
 
-    @Override
-    public void load(FinancialManager manager) {
+    public List<Transaction> load() {
         try (
-                FileReader file = new FileReader("purchases.txt");
+                FileReader file = new FileReader(FILE_NAME);
                 BufferedReader reader = new BufferedReader(file)
-                ) {
+        ) {
 
-            var loadedTransactions = reader.lines()
+            return reader.lines()
                     .map(this::demarshallTransaction)
                     .toList();
 
-            manager.reloadTransactionsFrom(loadedTransactions);
-
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
+            throw new RuntimeException(ioe.getMessage());
         }
     }
 
     private String marshallTransaction(Transaction transaction) {
         return "%s;%.5f;%s;%s\n".formatted(
-                    transaction.name(),
-                    transaction.amount(),
-                    transaction.type(),
-                    transaction.category()
-                );
+                transaction.name(),
+                transaction.amount(),
+                transaction.type(),
+                transaction.category()
+        );
     }
 
     private Transaction demarshallTransaction(String marshalledTransaction) {
@@ -75,4 +77,5 @@ public class FinancialFilePersistenceService implements FinancialPersistenceServ
                 category
         );
     }
+
 }

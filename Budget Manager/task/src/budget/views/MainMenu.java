@@ -15,6 +15,7 @@ public final class MainMenu {
     private final ListOfPurchasesMenu purchasesMenu;
     private final SaveMenu saveMenu;
     private final LoadMenu loadMenu;
+    private final AnalyzeMenu analyzeMenu;
 
     public MainMenu() {
         manager = InMemoryFinancialManager.getInstance();
@@ -24,6 +25,7 @@ public final class MainMenu {
         purchasesMenu = new ListOfPurchasesMenu(manager);
         saveMenu = new SaveMenu(manager);
         loadMenu = new LoadMenu(manager);
+        analyzeMenu = new AnalyzeMenu(manager);
     }
 
     public void show() {
@@ -34,6 +36,7 @@ public final class MainMenu {
         System.out.println("4) Balance");
         System.out.println("5) Save");
         System.out.println("6) Load");
+        System.out.println("7) Analyze (Sort)");
         System.out.println("0) Exit");
 
         handleUserInput();
@@ -50,6 +53,7 @@ public final class MainMenu {
             case 4 -> balanceMenu.show();
             case 5 -> saveMenu.show();
             case 6 -> loadMenu.show();
+            case 7 -> analyzeMenu.show();
             default -> throw new IllegalArgumentException("Chosen choice has no connected function");
         }
     }
